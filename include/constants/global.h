@@ -147,6 +147,4 @@
 #define CONNECTION_DIVE     5
 #define CONNECTION_EMERGE   6
 
-#include "ghoul_config.h"
-
 #endif // GUARD_CONSTANTS_GLOBAL_H

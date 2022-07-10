@@ -63,7 +63,6 @@
 #include "trade.h"
 #include "union_room.h"
 #include "window.h"
-#include "follow_me.h"
 #include "constants/battle.h"
 #include "constants/battle_frontier.h"
 #include "constants/field_effects.h"
@@ -3780,9 +3779,6 @@ static void FieldCallback_Surf(void)
 
 static bool8 SetUpFieldMove_Surf(void)
 {
-    if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_SURF))
-        return FALSE;
-    
     if (PartyHasMonWithSurf() == TRUE && IsPlayerFacingSurfableFishableWater() == TRUE)
     {
         gFieldCallback2 = FieldCallback_PrepareFadeInFromMenu;
@@ -3802,9 +3798,6 @@ static void DisplayCantUseSurfMessage(void)
 
 static bool8 SetUpFieldMove_Fly(void)
 {
-    if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_LEAVE_ROUTE))
-        return FALSE;
-    
     if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
         return TRUE;
     else
@@ -3825,9 +3818,6 @@ static void FieldCallback_Waterfall(void)
 static bool8 SetUpFieldMove_Waterfall(void)
 {
     s16 x, y;
-    
-    if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_WATERFALL))
-        return FALSE;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     if (MetatileBehavior_IsWaterfall(MapGridGetMetatileBehaviorAt(x, y)) == TRUE && IsPlayerSurfingNorth() == TRUE)
@@ -3847,9 +3837,6 @@ static void FieldCallback_Dive(void)
 
 static bool8 SetUpFieldMove_Dive(void)
 {
-    if (!CheckFollowerFlag(FOLLOWER_FLAG_CAN_DIVE))
-        return FALSE;
-    
     gFieldEffectArguments[1] = TrySetDiveWarp();
     if (gFieldEffectArguments[1] != 0)
     {
@@ -3995,7 +3982,7 @@ static void ShowOrHideHeldItemSprite(u16 item, struct PartyMenuBox *menuBox)
 
 void LoadHeldItemIcons(void)
 {
-    LoadSpriteSheet(&gSpriteSheet_HeldItem);
+    LoadSpriteSheet(&sSpriteSheet_HeldItem);
     LoadSpritePalette(&sSpritePalette_HeldItem);
 }
 
@@ -4231,11 +4218,7 @@ static bool8 IsHPRecoveryItem(u16 item)
     const u8 *effect;
 
     if (item == ITEM_ENIGMA_BERRY)
-        #ifndef FREE_ENIGMA_BERRY
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-        #else
-        effect = 0;
-        #endif
     else
         effect = gItemEffectTable[item - ITEM_POTION];
 
@@ -4552,11 +4535,7 @@ void ItemUseCB_PPRecovery(u8 taskId, TaskFunc task)
     u16 item = gSpecialVar_ItemId;
 
     if (item == ITEM_ENIGMA_BERRY)
-        #ifndef FREE_ENIGMA_BERRY
         effect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-        #else
-        effect = 0;
-        #endif
     else
         effect = gItemEffectTable[item - ITEM_POTION];
 
@@ -5198,11 +5177,7 @@ u8 GetItemEffectType(u16 item)
 
     // Read the item's effect properties.
     if (item == ITEM_ENIGMA_BERRY)
-        #ifndef FREE_ENIGMA_BERRY
         itemEffect = gSaveBlock1Ptr->enigmaBerry.itemEffect;
-        #else
-        itemEffect = 0;
-        #endif
     else
         itemEffect = gItemEffectTable[item - ITEM_POTION];
 

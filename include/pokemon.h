@@ -220,18 +220,11 @@ struct BaseStats
  /* 0x13 */ u8 growthRate;
  /* 0x14 */ u8 eggGroup1;
  /* 0x15 */ u8 eggGroup2;
-            #ifdef BATTLE_ENGINE
- /* 0x16 */ u8 abilities[NUM_ABILITY_SLOTS];
-            #else
-            u8 abilities[2];
-            #endif
+ /* 0x16 */ u8 abilities[2];
  /* 0x18 */ u8 safariZoneFleeRate;
  /* 0x19 */ u8 bodyColor : 7;
             u8 noFlip : 1;
-            #ifndef BATTLE_ENGINE
- /* 0x1A */ u8 abilityHidden;
-            #endif
-}; /* size = 28 */
+};
 
 struct BattleMove
 {
@@ -448,7 +441,5 @@ bool8 HasTwoFramesAnimation(u16 species);
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(u8 managerId, u8 mode);
 void DestroyMonSpritesGfxManager(u8 managerId);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 managerId, u8 spriteNum);
-void CreateShinyMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 nature);
-u8 SendMonToPC(struct Pokemon* mon);
 
 #endif // GUARD_POKEMON_H
