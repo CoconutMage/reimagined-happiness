@@ -2,6 +2,7 @@
 #define GUARD_ITEM_H
 
 #include "constants/item.h"
+#include "constants/item_config.h"
 
 typedef void (*ItemUseFunc)(u8);
 
@@ -21,6 +22,7 @@ struct Item
     u8 battleUsage;
     ItemUseFunc battleUseFunc;
     u8 secondaryId;
+    u8 flingPower;
 };
 
 struct BagPocket
@@ -75,6 +77,7 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
+
 void DrawHeaderBox(void);
 void HideHeaderBox(void);
 
@@ -84,5 +87,7 @@ enum ItemObtainFlags
     FLAG_SET_OBTAINED,
 };
 bool8 GetSetItemObtained(u16 item, u8 caseId);
+
+u8 ItemId_GetFlingPower(u16 itemId);
 
 #endif // GUARD_ITEM_H
