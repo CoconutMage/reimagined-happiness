@@ -1142,6 +1142,7 @@ static void DestroyItemIconSprite(void)
         FreeSpriteOamMatrix(&gSprites[sItemIconSpriteId2]);
         DestroySprite(&gSprites[sItemIconSpriteId2]);
     }
+}
 u8 ItemId_GetFlingPower(u16 itemId)
 {
     return gItems[SanitizeItemId(itemId)].flingPower;

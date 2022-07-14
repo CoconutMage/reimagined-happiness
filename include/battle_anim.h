@@ -122,6 +122,7 @@ void SetSpriteRotScale(u8 spriteId, s16 xScale, s16 yScale, u16 rotation);
 void InitSpriteDataForLinearTranslation(struct Sprite *sprite);
 void PrepareBattlerSpriteForRotScale(u8 spriteId, u8 objMode);
 void SetBattlerSpriteYOffsetFromRotation(u8 spriteId);
+u32 GetBattleBgPalettesMask(u8 battleBackground, u8 attacker, u8 target, u8 attackerPartner, u8 targetPartner, u8 a6, u8 a7);
 u32 GetBattlePalettesMask(bool8 battleBackground, bool8 attacker, bool8 target, bool8 attackerPartner, bool8 targetPartner, bool8 anim1, bool8 anim2);
 u32 GetBattleMonSpritePalettesMask(u8 playerLeft, u8 playerRight, u8 opponentLeft, u8 opponentRight);
 u8 AnimDummyReturnArg(u8 battler);
@@ -150,7 +151,8 @@ void PrepareAffineAnimInTaskData(struct Task *task, u8 spriteId, const union Aff
 bool8 RunAffineAnimFromTaskData(struct Task *task);
 void AnimThrowProjectile(struct Sprite *sprite);
 void GetBgDataForTransform(struct BattleAnimBgData *dest, u8 battlerId);
-u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, bool32 ignoreDeoxysForm);
+//u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId, bool32 ignoreDeoxysForm);
+u8 CreateAdditionalMonSpriteForMoveAnim(u16 species, bool8 isBackpic, u8 id, s16 x, s16 y, u8 subpriority, u32 personality, u32 trainerId, u32 battlerId);
 void ResetSpriteRotScale_PreserveAffine(struct Sprite *sprite);
 void TradeMenuBouncePartySprites(struct Sprite *sprite);
 void DestroyAnimVisualTaskAndDisableBlend(u8 taskId);
@@ -217,12 +219,8 @@ extern const union AffineAnimCmd *const gAffineAnims_SpinningBone[];
 void TryShinyAnimation(u8 battler, struct Pokemon *mon);
 u8 ItemIdToBallId(u16 itemId);
 u8 AnimateBallOpenParticles(u8 x, u8 y, u8 priority, u8 subpriority, u8 ballId);
-<<<<<<< HEAD
-u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 spritePalNum, u32 selectedPalettes, u8 ballId);
-=======
 u8 LaunchBallFadeMonTask(bool8 unFadeLater, u8 battlerId, u32 selectedPalettes, u8 ballId);
 bool32 IsCriticalCapture(void);
->>>>>>> federationBranch
 
 // battle_anim_utility_funcs.c
 void InitStatsChangeAnimation(u8);

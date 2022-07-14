@@ -2757,46 +2757,11 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 
     if (defAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
     {
-        // They likely meant to return here, as 8 is the number of points normally used in this mode for moves with no effect.
-        // Because there's no return the value instead gets interpreted by the switch, and the number of points becomes 0.
-        if (mode == EFFECTIVENESS_MODE_BAD)
-        {
+        if (arg2 == 1)
             typePower = 8;
-        #ifdef BUGFIX
-            return;
-        #endif
-        }
     }
     else
     {
-<<<<<<< HEAD
-        // Calculate a "type power" value to determine the benefit of using this type move against the target.
-        // This value will then be used to get the number of points to assign to the move.
-        while (TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE)
-        {
-            if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT)
-            {
-                i += 3;
-                continue;
-            }
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
-            {
-                // BUG: the value of TYPE_x2 does not exist in gTypeEffectiveness, so if defAbility is ABILITY_WONDER_GUARD, the conditional always fails
-                #ifndef BUGFIX
-                    #define WONDER_GUARD_EFFECTIVENESS TYPE_x2
-                #else
-                    #define WONDER_GUARD_EFFECTIVENESS TYPE_MUL_SUPER_EFFECTIVE
-                #endif
-                if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
-                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
-                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-                if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
-                    if ((defAbility == ABILITY_WONDER_GUARD && TYPE_EFFECT_MULTIPLIER(i) == WONDER_GUARD_EFFECTIVENESS) || defAbility != ABILITY_WONDER_GUARD)
-                        typePower = (typePower * TYPE_EFFECT_MULTIPLIER(i)) / 10;
-            }
-            i += 3;
-        }
-=======
         u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType1) * 2) * 5;
         u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType2) * 2) * 5;
 
@@ -2806,18 +2771,16 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
 
         if (defAbility == ABILITY_WONDER_GUARD && typeEffectiveness1 != 20 && typeEffectiveness2 != 20)
             typePower = 0;
->>>>>>> federationBranch
     }
 
-    switch (mode)
+    switch (arg2)
     {
-    case EFFECTIVENESS_MODE_GOOD:
-        // Weights moves that more effective.
+    case 0:
         switch (typePower)
         {
-        case TYPE_x0:
-        case TYPE_x0_25:
         case TYPE_x0_50:
+        case TYPE_x0_25:
+        case TYPE_x0:
         default:
             typePower = 0;
             break;
@@ -2832,23 +2795,21 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
             break;
         }
         break;
-    case EFFECTIVENESS_MODE_BAD:
-        // Weights moves that are less effective.
-        // Odd that there's no limit on this being used, even the Frontier Brain could end up using this.
+    case 1:
         switch (typePower)
         {
-        case TYPE_x0:
-            typePower = 8;
+        default:
+        case TYPE_x1:
+            typePower = 0;
             break;
         case TYPE_x0_25:
             typePower = 4;
             break;
+        case TYPE_x0:
+            typePower = 8;
+            break;
         case TYPE_x0_50:
             typePower = 2;
-            break;
-        default:
-        case TYPE_x1:
-            typePower = 0;
             break;
         case TYPE_x2:
             typePower = -2;
@@ -2858,9 +2819,7 @@ static int GetTypeEffectivenessPoints(int move, int targetSpecies, int arg2)
             break;
         }
         break;
-    case EFFECTIVENESS_MODE_AI_VS_AI:
-        // Used as part of calculating the winner in a battle between two AIs.
-        // Weights moves that are more effective much more strongly in both directions.
+    case 2:
         switch (typePower)
         {
         case TYPE_x0:

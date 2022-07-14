@@ -668,11 +668,6 @@ void BattleLoadOpponentMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
     BattleLoadMonSpriteGfx(mon, battlerId, TRUE);
 }
 
-void BattleLoadPlayerMonSpriteGfx(struct Pokemon *mon, u8 battlerId)
-{
-    BattleLoadMonSpriteGfx(mon, battlerId, FALSE);
-}
-
 void BattleGfxSfxDummy2(u16 species)
 {
 }

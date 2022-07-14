@@ -238,19 +238,11 @@ void BtlController_EmitStatusXor(u8 bufferId, u8 b); // unused
 void BtlController_EmitDataTransfer(u8 bufferId, u16 size, void *data);
 void BtlController_EmitDMA3Transfer(u8 bufferId, void *dst, u16 size, void *data); // unused
 void BtlController_EmitPlayBGM(u8 bufferId, u16 songId, void *data); // unused
-<<<<<<< HEAD
 void BtlController_EmitCmd32(u8 bufferId, u16 size, void *data); // unused
-void BtlController_EmitTwoReturnValues(u8 bufferId, u8 ret8, u16 ret16);
+void BtlController_EmitTwoReturnValues(u8 bufferId, u8 ret8, u32 ret16);
 void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 partyId, u8 *battlePartyOrder);
 void BtlController_EmitOneReturnValue(u8 bufferId, u16 ret);
 void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 ret);
-=======
-void BtlController_EmitCmd32(u8 bufferId, u16 size, void *c); // unused
-void BtlController_EmitTwoReturnValues(u8 bufferId, u8 arg1, u32 arg2);
-void BtlController_EmitChosenMonReturnValue(u8 bufferId, u8 b, u8 *c);
-void BtlController_EmitOneReturnValue(u8 bufferId, u16 arg1);
-void BtlController_EmitOneReturnValue_Duplicate(u8 bufferId, u16 b);
->>>>>>> federationBranch
 void BtlController_EmitClearUnkVar(u8 bufferId); // unused
 void BtlController_EmitSetUnkVar(u8 bufferId, u8 b); // unused
 void BtlController_EmitClearUnkFlag(u8 bufferId); // unused

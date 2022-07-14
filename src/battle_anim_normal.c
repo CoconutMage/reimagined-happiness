@@ -813,12 +813,6 @@ if (gBattleAnimArgs[0] & 0x1)
         selectedPalettes |= (0x10000 << BATTLE_PARTNER(gBattleAnimTarget));
 	if (gBattleAnimArgs[0] & 0x10 && IsBattlerAlive(BATTLE_PARTNER(gBattleAnimAttacker)))
         selectedPalettes |= (0x10000 << BATTLE_PARTNER(gBattleAnimAttacker));
-	
-    if (gBattleAnimArgs[1] & 0x100)
-        selectedPalettes |= (0x10000 << attackerBattler);
-
-    if (gBattleAnimArgs[2] & 0x100)
-        selectedPalettes |= (0x10000 << targetBattler);
 
 
     InvertPlttBuffer(selectedPalettes);

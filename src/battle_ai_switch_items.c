@@ -99,7 +99,6 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     }
 
     // Get party information.
-<<<<<<< HEAD
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
@@ -111,9 +110,7 @@ static bool8 ShouldSwitchIfWonderGuard(void)
     {
         firstId = 0, lastId = PARTY_SIZE;
     }
-=======
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
->>>>>>> federationBranch
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
@@ -195,7 +192,6 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     if (AI_GetAbility(gActiveBattler) == absorbingTypeAbility)
         return FALSE;
 
-<<<<<<< HEAD
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
@@ -207,9 +203,7 @@ static bool8 FindMonThatAbsorbsOpponentsMove(void)
     {
         firstId = 0, lastId = PARTY_SIZE;
     }
-=======
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
->>>>>>> federationBranch
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
@@ -389,8 +383,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
         battlerIn1 = gActiveBattler;
         battlerIn2 = gActiveBattler;
     }
-
-<<<<<<< HEAD
+	
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == 0)
@@ -402,9 +395,7 @@ static bool8 FindMonWithFlagsAndSuperEffective(u16 flags, u8 moduloPercent)
     {
         firstId = 0, lastId = PARTY_SIZE;
     }
-=======
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
->>>>>>> federationBranch
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
@@ -495,7 +486,6 @@ bool32 ShouldSwitch(void)
         battlerIn2 = gActiveBattler;
     }
 
-<<<<<<< HEAD
     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
     {
         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
@@ -507,9 +497,7 @@ bool32 ShouldSwitch(void)
     {
         firstId = 0, lastId = PARTY_SIZE;
     }
-=======
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
->>>>>>> federationBranch
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
@@ -592,7 +580,6 @@ void AI_TrySwitchOrUseItem(void)
                         battlerIn2 = GetBattlerAtPosition(battlerIdentity ^ BIT_FLANK);
                     }
 
-<<<<<<< HEAD
                     if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
                     {
                         if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
@@ -604,9 +591,8 @@ void AI_TrySwitchOrUseItem(void)
                     {
                         firstId = 0, lastId = PARTY_SIZE;
                     }
-=======
+					
                     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
->>>>>>> federationBranch
 
                     for (monToSwitchId = firstId; monToSwitchId < lastId; monToSwitchId++)
                     {
@@ -653,20 +639,11 @@ static u32 GetBestMonBatonPass(struct Pokemon *party, int firstId, int lastId, u
 
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-<<<<<<< HEAD
-            // Check type1.
-            if (TYPE_EFFECT_DEF_TYPE(i) == defType1)
-                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / TYPE_MUL_NORMAL;
-            // Check type2.
-            if (TYPE_EFFECT_DEF_TYPE(i) == defType2 && defType1 != defType2)
-                *var = (*var * TYPE_EFFECT_MULTIPLIER(i)) / TYPE_MUL_NORMAL;
-=======
             if (GetMonData(&party[i], MON_DATA_MOVE1 + j, NULL) == MOVE_BATON_PASS)
             {
                 bits |= gBitTable[i];
                 break;
             }
->>>>>>> federationBranch
         }
     }
 
@@ -776,26 +753,13 @@ static u32 GetBestMonDmg(struct Pokemon *party, int firstId, int lastId, u8 inva
 }
 
 u8 GetMostSuitableMonToSwitchInto(void)
-{
-<<<<<<< HEAD
-    u8 opposingBattler;
-#ifdef BUGFIX
-    s32 bestDmg;
-#else
-    u8 bestDmg; // Note: should be changed to s32 since it is also used for the actual damage done later
-#endif
-    u8 bestMonId;
-    u8 battlerIn1, battlerIn2;
-    s32 firstId;
-    s32 lastId; // + 1
-=======
-    u32 opposingBattler = 0;
+{   
+	u32 opposingBattler = 0;
     u32 bestDmg = 0;
     u32 bestMonId = 0;
     u8 battlerIn1 = 0, battlerIn2 = 0;
     s32 firstId = 0;
     s32 lastId = 0; // + 1
->>>>>>> federationBranch
     struct Pokemon *party;
     s32 i, j, aliveCount = 0;
     u8 invalidMons = 0;
@@ -824,100 +788,14 @@ u8 GetMostSuitableMonToSwitchInto(void)
         battlerIn2 = gActiveBattler;
     }
 
-<<<<<<< HEAD
-    if (gBattleTypeFlags & (BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_TOWER_LINK_MULTI))
-    {
-        if ((gActiveBattler & BIT_FLANK) == B_FLANK_LEFT)
-            firstId = 0, lastId = PARTY_SIZE / 2;
-        else
-            firstId = PARTY_SIZE / 2, lastId = PARTY_SIZE;
-    }
-    else
-    {
-        firstId = 0, lastId = PARTY_SIZE;
-    }
-=======
     GetAIPartyIndexes(gActiveBattler, &firstId, &lastId);
->>>>>>> federationBranch
 
     if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
         party = gPlayerParty;
     else
         party = gEnemyParty;
 
-<<<<<<< HEAD
-    invalidMons = 0;
-
-    while (invalidMons != 0x3F) // All mons are invalid.
-    {
-        bestDmg = TYPE_MUL_NO_EFFECT;
-        bestMonId = PARTY_SIZE;
-        // Find the mon whose type is the most suitable offensively.
-        for (i = firstId; i < lastId; i++)
-        {
-            u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
-            if (species != SPECIES_NONE
-                && GetMonData(&party[i], MON_DATA_HP) != 0
-                && !(gBitTable[i] & invalidMons)
-                && gBattlerPartyIndexes[battlerIn1] != i
-                && gBattlerPartyIndexes[battlerIn2] != i
-                && i != *(gBattleStruct->monToSwitchIntoId + battlerIn1)
-                && i != *(gBattleStruct->monToSwitchIntoId + battlerIn2))
-            {
-                u8 type1 = gBaseStats[species].type1;
-                u8 type2 = gBaseStats[species].type2;
-                u8 typeDmg = TYPE_MUL_NORMAL;
-                ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type1, type1, type2, &typeDmg);
-                ModulateByTypeEffectiveness(gBattleMons[opposingBattler].type2, type1, type2, &typeDmg);
-
-                /* Possible bug: this comparison gives the type that takes the most damage, when
-                a "good" AI would want to select the type that takes the least damage. Unknown if this
-                is a legitimate mistake or if it's an intentional, if weird, design choice */
-                if (bestDmg < typeDmg)
-                {
-                    bestDmg = typeDmg;
-                    bestMonId = i;
-                }
-            }
-            else
-            {
-                invalidMons |= gBitTable[i];
-            }
-        }
-
-        // Ok, we know the mon has the right typing but does it have at least one super effective move?
-        if (bestMonId != PARTY_SIZE)
-        {
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                move = GetMonData(&party[bestMonId], MON_DATA_MOVE1 + i);
-                if (move != MOVE_NONE && TypeCalc(move, gActiveBattler, opposingBattler) & MOVE_RESULT_SUPER_EFFECTIVE)
-                    break;
-            }
-
-            if (i != MAX_MON_MOVES)
-                return bestMonId; // Has both the typing and at least one super effective move.
-
-            invalidMons |= gBitTable[bestMonId]; // Sorry buddy, we want something better.
-        }
-        else
-        {
-            invalidMons = 0x3F; // No viable mon to switch.
-        }
-    }
-
-    gDynamicBasePower = 0;
-    gBattleStruct->dynamicMoveType = 0;
-    gBattleScripting.dmgMultiplier = 1;
-    gMoveResultFlags = 0;
-    gCritMultiplier = 1;
-    bestDmg = 0;
-    bestMonId = 6;
-
-    // If we couldn't find the best mon in terms of typing, find the one that deals most damage.
-=======
     // Get invalid slots ids.
->>>>>>> federationBranch
     for (i = firstId; i < lastId; i++)
     {
         if (GetMonData(&party[i], MON_DATA_SPECIES) == SPECIES_NONE

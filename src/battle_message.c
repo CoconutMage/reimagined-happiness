@@ -1772,7 +1772,6 @@ const u16 gCaughtMonStringIds[] =
     [B_MSG_LANETTES_BOX_FULL] = STRINGID_PKMNBOXLANETTESPCFULL,
 };
 
-<<<<<<< HEAD
 const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
 {
     MOVE_BIND,
@@ -1782,7 +1781,7 @@ const u16 gTrappingMoves[NUM_TRAPPING_MOVES + 1] =
     MOVE_WHIRLPOOL,
     MOVE_SAND_TOMB,
     0xFFFF // Never read
-=======
+};
 const u16 gRoomsStringIds[] =
 {
     STRINGID_PKMNTWISTEDDIMENSIONS, STRINGID_TRICKROOMENDS,
@@ -1794,7 +1793,6 @@ const u16 gRoomsStringIds[] =
 const u16 gStatusConditionsStringIds[] =
 {
     STRINGID_PKMNWASPOISONED, STRINGID_PKMNBADLYPOISONED, STRINGID_PKMNWASBURNED, STRINGID_PKMNWASPARALYZED, STRINGID_PKMNFELLASLEEP
->>>>>>> federationBranch
 };
 
 const u8 gText_PkmnIsEvolving[] = _("What?\n{STR_VAR_1} is evolving!");
